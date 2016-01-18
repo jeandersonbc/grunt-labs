@@ -19,13 +19,21 @@ module.exports = function(grunt) {
             dist : {
                 src: "dist"
             }
+        },
+        useminPrepare : {
+            html : "dist/**/*.html"
+        },
+        usemin : {
+            html : "dist/**/*.html"
         }
 
     });
 
     // Grunt tasks
-    grunt.registerTask("dist", ["clean", "copy"])
-    grunt.registerTask("default", "dist");
+    grunt.registerTask("optmize", ["useminPrepare", "concat", "uglify", "cssmin", "usemin"]);
+    grunt.registerTask("dist", ["clean", "copy"]);
+
+    grunt.registerTask("default", ["dist", "optmize"]);
 
     // Loading Grunt plugins
     grunt.loadNpmTasks("grunt-contrib-copy");
@@ -33,4 +41,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
+    grunt.loadNpmTasks("grunt-usemin");
 }
