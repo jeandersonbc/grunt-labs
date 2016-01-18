@@ -9,7 +9,7 @@ module.exports = function(grunt) {
             // subtask named 'public'
             public : {
                 nonull: true,
-                cwd: ".",
+                cwd: "public",
                 src: "**",
                 dest: "dist",
                 expand: true
@@ -29,4 +29,7 @@ module.exports = function(grunt) {
     // Loading Grunt plugins
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-concat");
+    grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
 }
