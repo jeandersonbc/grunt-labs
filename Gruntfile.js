@@ -33,12 +33,31 @@ module.exports = function(grunt) {
                 src: "**/*.{gif,png,jpg}",
                 dest: "dist/img"
             }
+        },
+        rev: {
+
+            // versioning settings
+            options: {
+                encoding: "utf8",
+                algorithm: "md5",
+                length: 8
+            },
+            images: {
+                src: ["dist/img/**/*.{jpg,png,gif}"]
+            },
+            scripts: {
+                src: ["dist/css/**/*.min.css", "dist/js/**/*.min.js"]
+            }
         }
 
     });
 
     // Grunt tasks
-    grunt.registerTask("optmize", ["useminPrepare", "concat", "uglify", "cssmin", "usemin", "imagemin"]);
+
+    // has to be executed before "usemin"
+    grunt.registerTask("versioning", ["rev:images", "rev:scripts"]);
+
+    grunt.registerTask("optmize", ["useminPrepare", "concat", "uglify", "cssmin", "versioning", "usemin", "imagemin"]);
     grunt.registerTask("dist", ["clean", "copy"]);
 
     grunt.registerTask("default", ["dist", "optmize"]);
@@ -51,4 +70,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-usemin");
     grunt.loadNpmTasks("grunt-contrib-imagemin");
+    grunt.loadNpmTasks("grunt-rev");
 }
