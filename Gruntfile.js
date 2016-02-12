@@ -25,12 +25,20 @@ module.exports = function(grunt) {
         },
         usemin : {
             html : "dist/**/*.html"
+        },
+        imagemin : {
+            public: {
+                expand: true,
+                cwd: "dist/img",
+                src: "**/*.{gif,png,jpg}",
+                dest: "dist/img"
+            }
         }
 
     });
 
     // Grunt tasks
-    grunt.registerTask("optmize", ["useminPrepare", "concat", "uglify", "cssmin", "usemin"]);
+    grunt.registerTask("optmize", ["useminPrepare", "concat", "uglify", "cssmin", "usemin", "imagemin"]);
     grunt.registerTask("dist", ["clean", "copy"]);
 
     grunt.registerTask("default", ["dist", "optmize"]);
@@ -42,4 +50,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-usemin");
+    grunt.loadNpmTasks("grunt-contrib-imagemin");
 }
